@@ -37,15 +37,6 @@ const rollupConfig = [
       }),
       terser()
     ]
-  }),
-  // output types
-  defineConfig({
-    input,
-    output: {
-      file: pkg.types,
-      format: 'es'
-    },
-    plugins: [dts()]
   })
 ]
 
