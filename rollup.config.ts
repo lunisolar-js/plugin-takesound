@@ -7,15 +7,26 @@ import path from 'path'
 import fs from 'fs'
 
 const pkg = JSON.parse(fs.readFileSync('./package.json', { encoding: 'utf8' }))
+const upCaseFirst = (str: string) => (str[0] ? str[0].toUpperCase() + str.slice(1) : '')
+const formatName = (n: string) => {
+  return n
+    .trim()
+    .replace(/\.(js|ts)$/, '')
+    .split('-')
+    .map((v, i) => (i === 0 ? v.trim() : upCaseFirst(v.trim())))
+    .join('')
+}
 
 const input = 'src/index.ts'
+const pluginGlobelName = 'lunisolarPlugin_takeSound'
 const rollupConfig = [
   defineConfig({
     input,
     output: [
       {
-        name: 'lunisolarPlugin_takeSound',
-        file: 'dist/index.umd.js'
+        format: 'iife',
+        name: pluginGlobelName,
+        file: 'dist/index.iife.js'
       },
       {
         format: 'cjs',
@@ -30,13 +41,7 @@ const rollupConfig = [
         sourcemap: true
       }
     ],
-    plugins: [
-      del({ targets: ['dist/*', 'locale/*'] }),
-      ts({
-        clean: true
-      }),
-      terser()
-    ]
+    plugins: [del({ targets: ['dist/*', 'locale/*'] }), ts(), terser()]
   })
 ]
 
@@ -56,16 +61,11 @@ const rollupConfig = [
         defineConfig({
           input,
           output: {
-            name: 'lsrPluginLocale_' + fileName,
+            name: `${pluginGlobelName}_locale_${formatName(fileName)}`,
             file: path.join(outputDir, `${fileName}.js`),
             format: 'umd'
           },
-          plugins: [
-            ts({
-              clean: true
-            }),
-            terser()
-          ]
+          plugins: [ts(), terser()]
         }),
         defineConfig({
           input,
