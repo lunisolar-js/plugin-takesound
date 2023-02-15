@@ -11,7 +11,7 @@ export const takeSound: lunisolar.PluginFunc = async (options, lsClass, lsFactor
   // **** 纳音 ****
   const sbProto = lsFactory.SB.prototype
   // takeSound
-  Object.defineProperty(sbProto, 'takeSound', {
+  Object.defineProperty<lunisolar.SB>(sbProto, 'takeSound', {
     get(): string {
       const locale = lsFactory.getLocale(this._config.lang)
       if (this._takeSoundValue === undefined) {
@@ -21,7 +21,7 @@ export const takeSound: lunisolar.PluginFunc = async (options, lsClass, lsFactor
     }
   })
   // takeSoundE5
-  Object.defineProperty(sbProto, 'takeSoundE5', {
+  Object.defineProperty<lunisolar.SB>(sbProto, 'takeSoundE5', {
     get(): lunisolar.Element5 {
       if (this._takeSoundValue === undefined) {
         this._takeSoundValue = (this.value >> 1) % 30
@@ -32,7 +32,7 @@ export const takeSound: lunisolar.PluginFunc = async (options, lsClass, lsFactor
     }
   })
   // 加到Lunisolar对象中
-  Object.defineProperty(lsProto, 'takeSound', {
+  Object.defineProperty<lunisolar.Lunisolar>(lsProto, 'takeSound', {
     get(): string {
       return this.char8.day.takeSound
     }
