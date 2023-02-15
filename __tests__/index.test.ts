@@ -2,17 +2,6 @@ import lunisolar from 'lunisolar'
 
 import { takeSound } from '../src/index'
 
-declare module 'lunisolar' {
-  interface Lunisolar {
-    takeSound: string
-  }
-  interface SB {
-    readonly _takeSoundValue: string
-    takeSound: string
-    takeSoundE5: lunisolar.Element5
-  }
-}
-
 lunisolar.extend(takeSound)
 
 describe('test takeSound', () => {
