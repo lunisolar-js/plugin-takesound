@@ -11,5 +11,5 @@ declare module 'lunisolar' {
   }
 }
 
-declare const plugin: PluginFunc
-export { plugin }
+declare const takeSound: PluginFunc
+export { takeSound }
