@@ -1,6 +1,8 @@
 # @lunisolar/plugin-takesound
 
-lunisolar.js的五行纳音插件
+[lunisolar.js](https://github.com/waterbeside/lunisolar)的**五行纳音**插件
+
+lunisolar.js文档请进入[lunisolar.js.org](https://lunisolar.js.org)
 
 安装：
 
